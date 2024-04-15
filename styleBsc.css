@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    
+    background: radial-gradient(circle,#0026ffb7, #212377af, #0000ff65);
+}
+
+.container {
+    position: relative;
+   
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 0 15px;
+    background-color: #ffffffd7;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+ 
+    
+
+}
+
+.container header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.container header::before {
+    left: 0;
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+}
+
+.container table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.container table th,
+.container table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.container table th {
+    background-color: #f2f2f2;
+}
+
+.container table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.container table th,
+.container table td {
+    padding: 3px;
+    text-align: left;
+    max-width: 100%;
+    
+}
+
+.container table th {
+    background-color: #4070f4;
+    color: white;
+    max-width: 100%;
+    overflow: auto
+}
+
+.container table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.container table tbody tr:nth-child(even):hover {
+    background-color: #ccc;
+}
+
+button {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #4070f4;
+    border-radius: 5px;
+    margin: 25px 0;
+    transition: all 0.3s linear;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+button:hover {
+    background-color: #265df2;
+}
+
+.contentBusca {
+    display: flex;
+    justify-content: center; /* Centraliza os elementos horizontalmente */
+    align-items: center; /* Centraliza os elementos verticalmente */
+}
+
+.contentBusca > * {
+    margin: 0 10px; /* Adiciona uma margem igual à esquerda e à direita de cada elemento */
+}
+.buscarTodos {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100%; /* Define a altura da div */
+}

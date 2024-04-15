@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/39/39850.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Buscar Cli</title>
+    <link rel="stylesheet" href="styleBsc.css">
+</head>
+<body>
+    <div class="container">
+        <header>Buscar Cliente</header>
+        <div class="content">
+        <div class="contentBusca">
+            <!-- Campo de entrada para inserir o ID do cliente -->
+            <label for="inputId">ID do Cliente:</label>
+            <input type="text" id="inputId" name="inputId">
+            <button onclick="buscarClientePorId()">Buscar</button>
+        
+    
+
+            <label for="inputCPF">Buscar por CPF:</label>
+            <input type="text" id="inputCPF" name="inputCPF">
+            <button onclick="buscarClientePorCPF()">Buscar</button>
+        </div>
+
+        <div class="buscarTodos">
+            <button onclick="listarTodos()">Listar Todos</button>
+        </div>
+        <!-- Botão para carregar todos os clientes -->
+
+        <!-- Tabela para exibir os dados -->
+        <table id="tabelaClientes">
+            <thead>
+                <tr>
+                    <th>ID</th> <!-- Nova coluna -->
+                    <th>Nome Completo</th>
+                    <th>CPF</th>
+                    <th>Identidade</th>
+                    <th>Celular</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                    <th>CEP</th>
+                    <th>Data de Nascimento</th>
+                    <th>Observação</th>
+                    <th>CLI</th>
+                    <th>Plano</th>
+                    <th>Processo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os dados da tabela serão preenchidos aqui -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <script>
+        function buscarClientePorCPF() {
+    const cpfCliente = document.getElementById('inputCPF').value;
+
+        fetch(`http://localhost:8080/cadastro/teste/${cpfCliente}`)
+            .then(response => response.json())
+            .then(cliente => {
+                exibirClienteNaTabela(cliente);
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o cliente:', error);
+                alert('Erro ao buscar o cliente. Verifique o CPF informado.');
+            });
+        }
+
+        function buscarClientePorId() {
+            const idCliente = document.getElementById('inputId').value;
+
+            fetch(`http://localhost:8080/cadastro/buscar/${idCliente}`)
+                .then(response => response.json())
+                .then(cliente => {
+                    exibirClienteNaTabela(cliente);
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar o cliente:', error);
+                    alert('Erro ao buscar o cliente. Verifique o ID informado.');
+                });
+        }
+
+        function listarTodos() {
+            fetch('http://localhost:8080/cadastro')
+                .then(response => response.json())
+                .then(data => {
+                    exibirDadosNaTabela(data);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar os dados:', error);
+                });
+        }
+
+        function exibirClienteNaTabela(cliente) {
+    const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+    tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${cliente.id}</td> <!-- Nova célula -->
+        <td>${cliente.nomeCompleto}</td>
+        <td>${cliente.cpf}</td>
+        <td>${cliente.identidade}</td>
+        <td>${cliente.celular}</td>
+        <td>${cliente.email}</td>
+        <td>${cliente.endereco}</td>
+        <td>${cliente.cep}</td>
+        <td>${cliente.datNascimento}</td>
+        <td>${cliente.obs}</td>
+        <td>${cliente.cli}</td>
+        <td>${cliente.planoEc}</td>
+        <td>${cliente.processo}</td>
+        <td><button onclick="editarCliente('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
+
+
+    `;
+    tabela.appendChild(tr);
+}
+
+        function exibirDadosNaTabela(dados) {
+            const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+            tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+            dados.forEach(cliente => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${cliente.id}</td> <!-- Nova célula -->
+                    <td>${cliente.nomeCompleto}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.identidade}</td>
+                    <td>${cliente.celular}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.endereco}</td>
+                    <td>${cliente.cep}</td>
+                    <td>${cliente.datNascimento}</td>
+                    <td>${cliente.obs}</td>
+                    <td>${cliente.cli}</td>
+                    <td>${cliente.planoEc}</td>
+                    <td>${cliente.processo}</td>
+                `;
+                tabela.appendChild(tr);
+            });
+        }
+        
+        function editarCliente(cpf) {
+            window.location.href = `indexEdit.html?cpf=${cpf}`;
+        }
+
+    </script>
+</body>
+</html>

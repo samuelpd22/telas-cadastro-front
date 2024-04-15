@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/39/39850.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-L8p6nK00aF7EJ5QGGnT+XlW2MTs0/zb7r67C1xfxWtxLf/O6BTVgqog0qg3tDdEg0P1KPS5KPiF8fBCUGnpgeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Advocacia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>Editar dados</header>
+
+        <form action="#" id="registrationForm">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">-</span>
+
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label for="nomeCompleto">Nome Completo</label>
+                            <input id="nomeCompleto" type="text" id="nomeCompleto" placeholder="Digite seu nome" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="cpf">CPF</label>
+                            <input id="cpf" type="text" id="cpf" placeholder="Digite seu CPF" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="identidade">Identidade</label>
+                            <input id="identidade"id="identidade" type="text" placeholder="Digite seu MG" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="cli">Cli</label>
+                            <input id="cli" id="cli"type="text" placeholder="Cli" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="processo">Processos</label>
+                            <input id="processo" name="processo" type="text" placeholder="Número do processo" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="planoEc">Plano </label>
+                            <input id="planoEc" name="planoEc" type="text" placeholder="Ex: Collor I, Collor II , Verão " required>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="form first">
+                
+                    <div class="details ID">
+                        <span class="title">-</span>
+    
+    
+                        <div class="fields">
+    
+                            <div class="input-field">
+                                <label for="celular">Celular</label>
+                                <input id="celular" name="celular" type="text" placeholder="(xx) xxxx-xxxx" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="text" placeholder="Digite seu email" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="endereco">Endereço</label>
+                                <input id="endereco" name="endereco" type="text" placeholder="Rua , nº , Bairro, Cidade" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="cep">CEP</label>
+                                <input id="cep" name="cep" type="text" placeholder="Digite seu CEP" required>
+                            </div>
+    
+                            <div class="input-field">
+                                <label for="datNascimento">Data de nascimento</label>
+                                <input id="datNascimento" name="datNascimento" type="date" placeholder="" required>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="obs">Observação</label>
+                                <input id="obs" name="obs" type="text" placeholder="...." required>
+                            </div>
+                          
+                            <button class="nextBtn" onclick="registerClient()">
+                                <span class="btnText"><a href="#">Salvar</a></span>
+                                <i class="uil uil-navigation"></i>
+                            </button>
+                            
+                           
+                    </div>
+                
+
+
+            </div>
+
+            
+
+            
+        </form>
+    </div>
+    <script>
+        function registerClient() {
+        const nomeCompleto = document.getElementById("nomeCompleto").value;
+        const cpf = document.getElementById("cpf").value; // Aqui está o CPF que o usuário insere no formulário
+        const identidade = document.getElementById("identidade").value;
+        const celular = document.getElementById("celular").value;
+        const email = document.getElementById("email").value;
+        const endereco = document.getElementById("endereco").value;
+        const cep = document.getElementById("cep").value;
+        const datNascimento = document.getElementById("datNascimento").value;
+        const obs = document.getElementById("obs").value;
+        const cli = document.getElementById("cli").value;
+        const planoEc = document.getElementById("planoEc").value;
+        const processo = document.getElementById("processo").value;
+
+    const data = {
+        nomeCompleto: nomeCompleto,
+        cpf: cpf, // Incluímos o CPF no objeto de dados
+        identidade: identidade,
+        celular: celular,
+        email: email,
+        endereco: endereco,
+        cep: cep,
+        datNascimento: datNascimento,
+        obs: obs,
+        cli: cli,
+        planoEc: planoEc,
+        processo: processo
+    };
+
+    
+    fetch(`http://localhost:8080/cadastro/editar/${cpf}`, { // Aqui passamos o CPF no lugar do ID na URL
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Edição bem-sucedida:', data);
+        // Adicione aqui lógica adicional após a edição bem-sucedida, se necessário.
+    })
+    .catch(error => {
+        console.error('Erro durante a edição:', error);
+        // Adicione aqui lógica adicional para lidar com erros, se necessário.
+    });
+    }
+
+    
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Obter o ID do cliente da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const idCliente = urlParams.get('cpf');
+
+    
+        });
+
+    </script>
+</body>
+</html>
