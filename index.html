@@ -21,28 +21,28 @@
 
                         <div class="input-field">
                             <label for="nomeCompleto">Nome Completo</label>
-                            <input id="nomeCompleto" type="text" id="nomeCompleto" placeholder="Digite seu nome" required>
+                            <input id="nomeCompleto" type="text" id="nomeCompleto" placeholder="Digite seu nome" >
                         </div>
                         <div class="input-field">
                             <label for="cpf">CPF</label>
-                            <input id="cpf" type="text" id="cpf" placeholder="Digite seu CPF" required>
+                            <input id="cpf" type="text" id="cpf" placeholder="Digite seu CPF" >
                         </div>
                         <div class="input-field">
                             <label for="identidade">Identidade</label>
-                            <input id="identidade"id="identidade" type="text" placeholder="Digite seu MG" required>
+                            <input id="identidade"id="identidade" type="text" placeholder="Digite seu MG" >
                         </div>
 
                         <div class="input-field">
                             <label for="cli">Cli</label>
-                            <input id="cli" id="cli"type="text" placeholder="Cli" required>
+                            <input id="cli" id="cli"type="text" placeholder="Cli" >
                         </div>
                         <div class="input-field">
                             <label for="processo">Processos</label>
-                            <input id="processo" name="processo" type="text" placeholder="Número do processo" required>
+                            <input id="processo" name="processo" type="text" placeholder="Número do processo" >
                         </div>
                         <div class="input-field">
                             <label for="planoEc">Plano </label>
-                            <input id="planoEc" name="planoEc" type="text" placeholder="Ex: Collor I, Collor II , Verão " required>
+                            <input id="planoEc" name="planoEc" type="text" placeholder="Ex: Collor I, Collor II , Verão " >
                         </div>
                         
                     </div>
@@ -58,33 +58,37 @@
     
                             <div class="input-field">
                                 <label for="celular">Celular</label>
-                                <input id="celular" name="celular" type="text" placeholder="(xx) xxxx-xxxx" required>
+                                <input id="celular" name="celular" type="text" placeholder="(xx) xxxx-xxxx" >
                             </div>
                             <div class="input-field">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="text" placeholder="Digite seu email" required>
+                                <input id="email" name="email" type="text" placeholder="Digite seu email" >
                             </div>
                             <div class="input-field">
                                 <label for="endereco">Endereço</label>
-                                <input id="endereco" name="endereco" type="text" placeholder="Rua , nº , Bairro, Cidade" required>
+                                <input id="endereco" name="endereco" type="text" placeholder="Rua , nº , Bairro, Cidade" >
                             </div>
                             <div class="input-field">
                                 <label for="cep">CEP</label>
-                                <input id="cep" name="cep" type="text" placeholder="Digite seu CEP" required>
+                                <input id="cep" name="cep" type="text" placeholder="Digite seu CEP" >
                             </div>
     
                             <div class="input-field">
                                 <label for="datNascimento">Data de nascimento</label>
-                                <input id="datNascimento" name="datNascimento" type="date" placeholder="" required>
+                                <input id="datNascimento" name="datNascimento" type="date" placeholder="" >
                             </div>
 
                             <div class="input-field">
                                 <label for="obs">Observação</label>
-                                <input id="obs" name="obs" type="text" placeholder="...." required>
+                                <input id="obs" name="obs" type="text" placeholder="...." >
                             </div>
                           
                             <button class="nextBtn" onclick="registerClient()">
                                 <span class="btnText"><a href="#">Salvar</a></span>
+                                <i class="uil uil-navigation"></i>
+                            </button>
+                            <button class="nextBtn" onclick="redirectToIndexBsc()">
+                                <span class="btnText"><a href="indexBsc.html">Pesquisar</a></span>
                                 <i class="uil uil-navigation"></i>
                             </button>
                             
@@ -154,7 +158,9 @@
 }
 
 
-
+    function redirectToIndexBsc() {
+        window.location.href = 'indexBsc.html';
+    }
         /*function registerClient() {
                const registrationForm = document.getElementById("registrationForm");
                const formData = new FormData(registrationForm);

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/39/39850.png">
+    <title>Login - Advocacia</title>
+    <link rel="stylesheet" href="styleLogin.css">
+</head>
+<body>
+    <div class="container">
+        <header>Entrar</header>
+
+        <form action="#" id="loginForm">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title"></span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="login">Usuário</label>
+                            <input id="login" type="text" placeholder="Digite seu usuário" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="password">Senha</label>
+                            <input id="password" type="password" placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="nextBtn" id="loginButton">
+                    <span class="btnText">Entrar</span>
+                    <i class="uil uil-navigation"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("loginButton").addEventListener("click", function() {
+            var login = document.getElementById("login").value;
+            var password = document.getElementById("password").value;
+
+            // Realiza a solicitação fetch para o endpoint /login/adm
+            fetch("http://localhost:8080/login/adm", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    login: login,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redireciona para o próximo index
+                    window.location.href = "indexBsc.html";
+                } else {
+                    // Exibe um alerta de usuário inválido
+                    alert("Usuário ou senha inválidos.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao fazer a solicitação:", error);
+            });
+        });
+    </script>
+</body>
+</html>

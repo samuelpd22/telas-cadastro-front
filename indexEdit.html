@@ -90,6 +90,11 @@
                                 <i class="uil uil-navigation"></i>
                             </button>
                             
+                            <button class="nextBtn" onclick="redirectToIndexBsc()">
+                                <span class="btnText"><a href="indexBsc.html">Pesquisar</a></span>
+                                <i class="uil uil-navigation"></i>
+                            </button>
+                            
                            
                     </div>
                 
@@ -103,7 +108,12 @@
         </form>
     </div>
     <script>
-        function registerClient() {
+
+    function redirectToIndexBsc() {
+        window.location.href = 'indexBsc.html';
+    }
+
+    function registerClient() {
         const nomeCompleto = document.getElementById("nomeCompleto").value;
         const cpf = document.getElementById("cpf").value; // Aqui está o CPF que o usuário insere no formulário
         const identidade = document.getElementById("identidade").value;
@@ -160,6 +170,8 @@
 
     
         });
+
+        
 
     </script>
 </body>

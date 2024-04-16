@@ -14,19 +14,34 @@ body {
     justify-items: center;
     justify-content: center;
     
-    background: radial-gradient(circle,#0026ffb7, #212377af, #0000ff65);
+    background: radial-gradient(circle, #0026ffb7, #212377af, #0000ff65);
+    background-size: 200% 200%; /* Define o tamanho inicial do gradiente */
+    animation: gradientAnimation 5s infinite alternate; /* Animação de 5 segundos alternando */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%; /* Início da animação */
+    }
+    100% {
+        background-position: 100% 100%; /* Fim da animação */
+    }
 }
 
 .container {
     position: relative;
-   
-    width: 100%;
+    
+    height: 100%;
+    width: 90%;
     border-radius: 6px;
     padding: 30px;
     margin: 0 15px;
     background-color: #ffffffd7;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
- 
+    margin-top: 10px;
+    margin-bottom: 100px;
+    overflow-x: auto; /* Adiciona rolagem horizontal quando necessário */
+
     
 
 }
@@ -97,16 +112,16 @@ button {
     display: inline-block;
     align-items: center;
     justify-content: center;
-    height: 45px;
-    max-width: 200px;
+    height: 30px;
+    max-width: 100px;
     width: 100%;
     border: none;
     outline: none;
     color: #fff;
     background-color: #4070f4;
-    border-radius: 5px;
+    border-radius: 19px;
     margin: 25px 0;
-    transition: all 0.3s linear;
+    transition: all 0.1s linear;
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
@@ -126,9 +141,12 @@ button:hover {
 .contentBusca > * {
     margin: 0 10px; /* Adiciona uma margem igual à esquerda e à direita de cada elemento */
 }
-.buscarTodos {
-    display: flex;
+.buscarTodos, a {
+    display: inline;
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center; /* Centraliza verticalmente */
+    width: 100%; /* Define a largura do link como 100% do botão */
     height: 100%; /* Define a altura da div */
+    text-decoration: none;
+    color: white;
 }

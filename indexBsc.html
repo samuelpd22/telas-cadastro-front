@@ -15,20 +15,32 @@
         <div class="contentBusca">
             <!-- Campo de entrada para inserir o ID do cliente -->
             <label for="inputId">ID do Cliente:</label>
-            <input type="text" id="inputId" name="inputId">
+            <input type="text" id="inputId" name="inputId" placeholder="Digite o id">
             <button onclick="buscarClientePorId()">Buscar</button>
-        
+            
+            
+            <label for="inputNome">Nome do Cliente:</label>
+            <input type="text" id="inputNome" name="inputNome" placeholder="Digite o nome">
+            <button onclick="buscarClientePorNome()">Buscar</button>
+           
     
-
+              <!-- Campo de entrada para inserir o CPF do cliente -->
             <label for="inputCPF">Buscar por CPF:</label>
-            <input type="text" id="inputCPF" name="inputCPF">
+            <input type="text" id="inputCPF" name="inputCPF" placeholder="Digite o cpf">
             <button onclick="buscarClientePorCPF()">Buscar</button>
         </div>
 
+        <!-- Botão para listar todos os clientes-->
         <div class="buscarTodos">
             <button onclick="listarTodos()">Listar Todos</button>
         </div>
-        <!-- Botão para carregar todos os clientes -->
+
+          <!-- Botão para ir para pagina de cadastro de clientes -->
+        <div class="buscarTodos">
+            <button ><a href="index.html">Cadastrar</a></button>
+        </div>
+
+
 
         <!-- Tabela para exibir os dados -->
         <table id="tabelaClientes">
@@ -56,8 +68,9 @@
         </div>
     </div>
     <script>
+
         function buscarClientePorCPF() {
-    const cpfCliente = document.getElementById('inputCPF').value;
+        const cpfCliente = document.getElementById('inputCPF').value;
 
         fetch(`http://localhost:8080/cadastro/teste/${cpfCliente}`)
             .then(response => response.json())
@@ -96,34 +109,34 @@
         }
 
         function exibirClienteNaTabela(cliente) {
-    const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
-    tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
+        const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+        tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td>${cliente.id}</td> <!-- Nova célula -->
-        <td>${cliente.nomeCompleto}</td>
-        <td>${cliente.cpf}</td>
-        <td>${cliente.identidade}</td>
-        <td>${cliente.celular}</td>
-        <td>${cliente.email}</td>
-        <td>${cliente.endereco}</td>
-        <td>${cliente.cep}</td>
-        <td>${cliente.datNascimento}</td>
-        <td>${cliente.obs}</td>
-        <td>${cliente.cli}</td>
-        <td>${cliente.planoEc}</td>
-        <td>${cliente.processo}</td>
-        <td><button onclick="editarCliente('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${cliente.id}</td> <!-- Nova célula -->
+            <td>${cliente.nomeCompleto}</td>
+            <td>${cliente.cpf}</td>
+            <td>${cliente.identidade}</td>
+            <td>${cliente.celular}</td>
+            <td>${cliente.email}</td>
+            <td>${cliente.endereco}</td>
+            <td>${cliente.cep}</td>
+            <td>${cliente.datNascimento}</td>
+            <td>${cliente.obs}</td>
+            <td>${cliente.cli}</td>
+            <td>${cliente.planoEc}</td>
+            <td>${cliente.processo}</td>
+            <td><button onclick="editarCliente('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
 
 
-    `;
-    tabela.appendChild(tr);
-}
+            `;
+        tabela.appendChild(tr);
+    }
 
         function exibirDadosNaTabela(dados) {
-            const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
-            tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
+        const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+        tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
 
             dados.forEach(cliente => {
                 const tr = document.createElement('tr');
@@ -146,9 +159,42 @@
             });
         }
         
-        function editarCliente(cpf) {
-            window.location.href = `indexEdit.html?cpf=${cpf}`;
-        }
+        function buscarClientePorNome() {
+    const nomeCliente = document.getElementById('inputNome').value;
+
+    console.log('Nome do cliente:', nomeCliente);
+
+    fetch(`http://localhost:8080/cadastro/buscarPorNome?nome=${nomeCliente}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar o cliente');
+            }
+            return response.json();
+        })
+        .then(clientes => {
+            // Verifique se a lista de clientes não está vazia
+            if (clientes.length === 0) {
+                alert('Nenhum cliente encontrado com esse nome.');
+                return;
+            }
+            // Limpe a tabela antes de adicionar novos clientes
+            limparTabelaClientes();
+            // Exiba cada cliente na tabela
+            clientes.forEach(cliente => {
+                exibirClienteNaTabela(cliente);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar o cliente:', error);
+            alert('Erro ao buscar o cliente. Verifique o nome informado.');
+        });
+}
+
+// Função para limpar a tabela de clientes
+function limparTabelaClientes() {
+    const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+    tabela.innerHTML = '';
+}
 
     </script>
 </body>
