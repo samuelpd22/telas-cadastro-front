@@ -127,12 +127,17 @@
             <td>${cliente.cli}</td>
             <td>${cliente.planoEc}</td>
             <td>${cliente.processo}</td>
-            <td><button onclick="editarCliente('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
+            <td><button class="editarButton" onclick="redirecionarParaEdicao('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
 
 
             `;
         tabela.appendChild(tr);
     }
+
+        function redirecionarParaEdicao(cpf) {
+            // Redirecionar para a página de edição
+            window.location.href = `indexEdit.html?cpf=${cpf}`;
+        }   
 
         function exibirDadosNaTabela(dados) {
         const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
@@ -154,6 +159,7 @@
                     <td>${cliente.cli}</td>
                     <td>${cliente.planoEc}</td>
                     <td>${cliente.processo}</td>
+                    <td><button class="editarButton" onclick="redirecionarParaEdicao('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
                 `;
                 tabela.appendChild(tr);
             });
@@ -162,7 +168,7 @@
         function buscarClientePorNome() {
     const nomeCliente = document.getElementById('inputNome').value;
 
-    console.log('Nome do cliente:', nomeCliente);
+    
 
     fetch(`http://localhost:8080/cadastro/buscarPorNome?nome=${nomeCliente}`)
         .then(response => {
@@ -195,6 +201,7 @@ function limparTabelaClientes() {
     const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
     tabela.innerHTML = '';
 }
+
 
     </script>
 </body>
