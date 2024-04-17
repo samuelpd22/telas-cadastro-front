@@ -110,9 +110,11 @@
         }
 
         function exibirClienteNaTabela(cliente) {
-        const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
-        tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
+    const tabela = document.getElementById('tabelaClientes').querySelector('tbody');
+    tabela.innerHTML = ''; // Limpa o conteúdo atual da tabela
 
+    // Verifica se o cliente retornado não é "undefined" e contém dados válidos
+    if (cliente && cliente.id && cliente.nomeCompleto && cliente.cpf) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${cliente.id}</td> <!-- Nova célula -->
@@ -129,11 +131,15 @@
             <td>${cliente.planoEc}</td>
             <td>${cliente.processo}</td>
             <td><button class="editarButton" onclick="redirecionarParaEdicao('${cliente.cpf}')"><i class="fas fa-pencil-alt"></i></button></td>
-
-
-            `;
+        `;
         tabela.appendChild(tr);
+    } else {
+        // Se o cliente não for válido, exibe uma mensagem de erro na tela usando um alert
+        console.error('Cliente inválido:', cliente);
+        // Exibe um alert indicando que nenhum cliente foi encontrado com o CPF fornecido
+        alert('Nenhum cliente encontrado, verifique o ID ou CPF informado.');
     }
+}
 
         function redirecionarParaEdicao(cpf) {
             // Redirecionar para a página de edição
